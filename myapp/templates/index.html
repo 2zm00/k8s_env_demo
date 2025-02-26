@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kubernetes Env Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #4285f4; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .config { background-color: #e6f3ff; }
+        .secret { background-color: #ffe6e6; }
+    </style>
+</head>
+<body>
+    <h1>Kubernetes 환경변수 데모</h1>
+    <h2>현재 설정된 환경 변수:</h2>
+    <table>
+        <tr>
+            <th>키</th>
+            <th>값</th>
+            <th>유형</th>
+        </tr>
+        {% for key, value in env_vars.items %}
+        <tr class="{% if key in secret_keys %}secret{% else %}config{% endif %}">
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+            <td>{% if key in secret_keys %}SECRET{% else %}CONFIG{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> 
